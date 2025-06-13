@@ -7,24 +7,33 @@ export class RandomQuotesApp {
         this.randomQuoteBtn = document.getElementById('random-quote-btn');
         this.quoteTextElement = document.getElementById('quote-text');
         this.quoteAuthorElement = document.getElementById('quote-autor');
+        this.randomQuoteApiBtn = document.getElementById('random-api-btn');
         this.init();
     }
 
     displayCurrentQuote() {
-        const { id, text, author } = this.currentQuote;
         this.quoteTextElement.textContent = this.currentQuote.formatText();
         this.quoteAuthorElement.textContent = this.currentQuote.formatAuthor();
     }
 
-    getRandomQuote() {
-        const randomQuote = RandomQuote.getRandomQuote();
-        this.currentQuote = randomQuote;
-        this.displayCurrentQuote();
+    changeCurrentQuote(newQuote) {
+        if (newQuote instanceof Quote) {
+            this.currentQuote = newQuote;
+            this.displayCurrentQuote();
+        }
+    }
 
+    getRandomQuote() {
+        this.changeCurrentQuote(RandomQuote.getRandomQuote());
+    }
+
+    getRandomQuoteViaAPI() {
+        RandomQuote.getRandomQuoteViaApi().then((quote) => this.changeCurrentQuote(quote));
     }
 
     init() {
         this.randomQuoteBtn.addEventListener('click', () => this.getRandomQuote());
+        this.randomQuoteApiBtn.addEventListener('click', () => this.getRandomQuoteViaAPI())
     }
 }
 

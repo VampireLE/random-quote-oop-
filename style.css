@@ -32,6 +32,20 @@ body {
     background-color: #007bff;
   }
 
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-secandary {
+    background-color: #28a745;
+    border: 1px solid #28a745;
+  }
+
+  .btn-secandary:hover {
+    background-color: #218838;
+    border: 1px solid #218838;
+  }
+
   .btn-delete {
     background-color: transparent;
     color: #ff0000;
