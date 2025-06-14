@@ -10,17 +10,30 @@ class RandomQuote {
         return new Quote(id, text, author);
     }
 
-    static getRandomQuoteViaApi() {
+    static async getRandomQuoteViaApi() {
         const url = 'https://quoteslate.vercel.app/api/quotes/random';
         const options = { headers: {'Content-Type': 'application/json'} };
-        return fetch(url, options)
-        .then((response) => response.json())
-        .then((quote) => {
-            const {_id: id, quote: content, author} = quote;
-            return new Quote(id, content, author);
-        })
-        .catch((error) => console.log(error))
+        try {
+            const res =  await fetch(url, options)
+            const {_id: id, quote: content, author} = await res.json();
+            new Quote(id,quote,author)
+        } catch (error) {
+            console.log(error);
+            throw new Error(error);
+        }
     }
+
+    // static getRandomQuoteViaApi() {
+    //     const url = 'https://quoteslate.vercel.app/api/quotes/random';
+    //     const options = { headers: {'Content-Type': 'application/json'} };
+    //     return fetch(url, options)
+    //     .then((response) => response.json())
+    //     .then((quote) => {
+    //         const {_id: id, quote: content, author} = quote;
+    //         return new Quote(id, content, author);
+    //     })
+    //     .catch((error) => console.log(error))
+    // }
 }
 
 export default RandomQuote;

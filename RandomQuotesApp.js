@@ -27,8 +27,8 @@ export class RandomQuotesApp {
         this.changeCurrentQuote(RandomQuote.getRandomQuote());
     }
 
-    getRandomQuoteViaAPI() {
-        RandomQuote.getRandomQuoteViaApi().then((quote) => this.changeCurrentQuote(quote));
+    async getRandomQuoteViaAPI() {
+        this.changeCurrentQuote(await RandomQuote.getRandomQuoteViaApi());   
     }
 
     init() {
