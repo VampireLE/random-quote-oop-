@@ -11,12 +11,18 @@ class RandomQuote {
     }
 
     static async getRandomQuoteViaApi() {
-        const url = 'https://quoteslate.vercel.app/api/quotes/random';
+        const url = 'https://api.quotable.io/quotes/random';
         const options = { headers: {'Content-Type': 'application/json'} };
         try {
             const res =  await fetch(url, options)
-            const {_id: id, quote: content, author} = await res.json();
-            new Quote(id,quote,author)
+            const quotes = await res.json();
+            if (Array.isArray(quotes) && quotes.length === 1) {
+                const quote = quotes[0];
+                const {_id: id, content, author} = quote;
+                if (id && content && author) {
+                    return new Quote(id, content, author);
+                }
+            }
         } catch (error) {
             console.log(error);
             throw new Error(error);
