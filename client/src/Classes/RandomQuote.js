@@ -1,6 +1,7 @@
 import quotes from '../data/qoutes.js';
 import MathUtils from '../utils/MathUtils.js';
 import { Quote } from './Quote.js';
+import { moduleName } from './../config.js';
 
 class RandomQuote {
     
@@ -11,7 +12,7 @@ class RandomQuote {
     }
 
     static async getRandomQuoteViaPublicApi() {
-        const url = 'https://api.quotable.io/quotes/random';
+        const url = `${API_URL}/quotes/random`;
         const options = { headers: {'Content-Type': 'application/json'} };
         try {
             const res =  await fetch(url, options)
@@ -29,7 +30,7 @@ class RandomQuote {
     }
 
     static async getRandomQuoteVieOwnAPI() {
-        const url = 'http://localhost:5000/quotes/random-single';
+        const url = `${moduleName.PUBLIC_API_URL}/quotes/random-single`;
         const options = { headers: {'Content-Type': 'application/json'} };
         try {const res = await fetch(url, options)
         const quote = await res.json()
