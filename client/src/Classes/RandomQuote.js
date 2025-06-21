@@ -10,7 +10,7 @@ class RandomQuote {
         return new Quote(id, text, author);
     }
 
-    static async getRandomQuoteViaApi() {
+    static async getRandomQuoteViaPublicApi() {
         const url = 'https://api.quotable.io/quotes/random';
         const options = { headers: {'Content-Type': 'application/json'} };
         try {
@@ -24,9 +24,17 @@ class RandomQuote {
                 }
             }
         } catch (error) {
-            console.log(error);
             throw new Error(error);
         }
+    }
+
+    static async getRandomQuoteVieOwnAPI() {
+        const url = 'http://localhost:5000/quotes/random-single';
+        const options = { headers: {'Content-Type': 'application/json'} };
+        try {const res = await fetch(url, options)
+        const quote = await res.json()
+        const {id, text, author} = quote;
+        return new Quote(id, text, author);} catch {error => console.log(error)}
     }
 
     // static getRandomQuoteViaApi() {
