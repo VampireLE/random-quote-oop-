@@ -1,7 +1,7 @@
 import quotes from '../data/qoutes.js';
 import MathUtils from '../utils/MathUtils.js';
 import { Quote } from './Quote.js';
-import { moduleName } from './../config.js';
+import { moduleName } from '../../config.js';
 
 class RandomQuote {
     
